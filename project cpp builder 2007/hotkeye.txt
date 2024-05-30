@@ -1,0 +1,38 @@
+private:	// User declarations
+        void __fastcall HotKey(TMessage &Msg);
+public:		// User declarations
+        __fastcall TForm1(TComponent* Owner);
+        BEGIN_MESSAGE_MAP
+        MESSAGE_HANDLER(WM_HOTKEY,TMessage,HotKey)
+        END_MESSAGE_MAP(TForm)
+
+
+
+
+
+void __fastcall TForm1::HotKey(TMessage &Msg)
+{
+    if (Msg.WParam == 1){
+    if(Form1->Caption=="AutoClick - ON" && Form1->Caption!="AutoClick - REC") {
+       Timer1->Enabled=false;
+       Form1->Caption="AutoClick - OFF";
+        Label2->Caption="Turned OFF";}
+       else{
+                 if(Form1->Caption=="AutoClick - OFF" && Form1->Caption!="AutoClick - REC") {
+                 Timer1->Enabled=true;
+                 Form1->Caption="AutoClick - ON";
+        Label2->Caption="Turned ON"; }
+       }
+    }
+    if (Msg.WParam == 2) {
+     t_cur.push_back(cur);
+     s=IntToStr(cur.x) + " : " + IntToStr(cur.y);
+     ListBox1->Items->Add(s);
+    }
+}
+
+
+
+
+
+        RegisterHotKey(Form1->Handle, 2, 0, VK_F7);
